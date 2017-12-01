@@ -1,0 +1,7 @@
+platform :ios, '8.0'
+
+target 'CopyLinkActivityExample' do
+  use_frameworks!
+  pod 'CopyLinkActivity', :path => '../'
+end
+
