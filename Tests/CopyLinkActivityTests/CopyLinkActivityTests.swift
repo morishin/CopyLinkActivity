@@ -6,7 +6,7 @@ class CopyLinkActivityTests: XCTestCase {
         let activity1 = CopyLinkActivity()
         XCTAssertEqual(activity1.activityType, CopyLinkActivity.defaultActivityType)
         let activity2 = CopyLinkActivity(activityType: "test")
-        XCTAssertEqual(activity2.activityType, UIActivityType("test"))
+        XCTAssertEqual(activity2.activityType, UIActivity.ActivityType("test"))
     }
 
     func testActivityTitle() {

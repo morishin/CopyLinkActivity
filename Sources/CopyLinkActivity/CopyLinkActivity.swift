@@ -1,7 +1,7 @@
 import UIKit
 
 public class CopyLinkActivity: UIActivity {
-    public static let defaultActivityType = UIActivityType("me.morishin.activity.CopyLink")
+    public static let defaultActivityType = UIActivity.ActivityType("me.morishin.activity.CopyLink")
     public static let defaultActivityImage: UIImage = {
         guard let image = UIImage(named: "copy_link_activity_icon", in: Bundle(for: CopyLinkActivity.self), compatibleWith: nil) else {
             assertionFailure("Failed to load image.")
@@ -10,7 +10,7 @@ public class CopyLinkActivity: UIActivity {
         return image
     }()
 
-    private let _activityType: UIActivityType
+    private let _activityType: UIActivity.ActivityType
     private let _activityImage: UIImage
     private let _activityTitle: String
 
@@ -21,17 +21,17 @@ public class CopyLinkActivity: UIActivity {
         activityTitle: String = "Copy Link",
         activityImage: UIImage = CopyLinkActivity.defaultActivityImage
     ) {
-        _activityType = activityType.map { UIActivityType($0) } ?? CopyLinkActivity.defaultActivityType
+        _activityType = activityType.map { UIActivity.ActivityType($0) } ?? CopyLinkActivity.defaultActivityType
         _activityTitle = activityTitle
         _activityImage = activityImage
         super.init()
     }
 
-    public override static var activityCategory: UIActivityCategory {
+    public override static var activityCategory: UIActivity.Category {
         return .action
     }
 
-    public override var activityType: UIActivityType? {
+    public override var activityType: UIActivity.ActivityType? {
         return _activityType
     }
 
@@ -48,7 +48,7 @@ public class CopyLinkActivity: UIActivity {
     }
 
     public override func prepare(withActivityItems activityItems: [Any]) {
-        linkURL = activityItems.flatMap { $0 as? URL }.first
+        linkURL = activityItems.compactMap { $0 as? URL }.first
     }
 
     public override func perform() {
